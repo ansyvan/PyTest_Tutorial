@@ -1,4 +1,4 @@
-# PyTest_Tutorial
+# PyTest-Tutorial
 
 <h1>Проєктне завдання 1</h1>
 

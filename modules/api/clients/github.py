@@ -26,26 +26,27 @@ class GitHub:
     def get_info_user(self, username, headers):
         r = requests.get(
             f"https://api.github.com/users/{username}/hovercard",
-            headers
+            headers=headers
             )
         body = r.json()
 
         return body
     
     
-    def get_info_user_repository(self, username, repository, repo_id):
+    def get_info_user_repository(self, username, repository, repo_id, headers):
         r = requests.get(
             f"https://api.github.com/users/{username}/hovercard",
-            params={"subject_type": repository, "subject_id": repo_id}
+            params={"subject_type": repository, "subject_id": repo_id},
+            headers=headers
             )
         body = r.json()
 
         return body
     
 
-    def list_users(self):
+    def list_users(self, users_per_page=30):
         r = requests.get(f"https://api.github.com/users",
-        params={"per_page": 30}
+        params={"per_page": users_per_page}
         )
         body = r.json()
 
@@ -61,9 +62,9 @@ class GitHub:
         return body
     
 
-    def list_branches(self, owner, repo, commit_sha):
+    def list_branches(self, owner, repo):
         r = requests.get(
-            f"https://api.github.com/repos/{owner}/{repo}/commits/{commit_sha}/branches-where-head"
+            f"https://api.github.com/repos/{owner}/{repo}"
         )
         body = r.json()
 

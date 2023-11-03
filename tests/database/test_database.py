@@ -92,12 +92,14 @@ def test_incorrect_datatype_insert():
     # Check number of new products equal to 0
     assert len(qnt) == 0
 
-# 9
+# 9 Check if Error message appears if not unique id inserted
 @pytest.mark.database
 def test_existing_id_insert():
     db = Database()
     db.insert_order(99, 1, 1, '03:14:08')
-    db.insert_order(99, 2, 2, '03:14:08')
+
+    with pytest.raises(sqlite3.IntegrityError):
+        db.insert_order(99, 2, 2, '03:14:08')
     db.delete_order_by_id(99)
     orders = db.get_all_orders()
     print("Замовлення", orders)
@@ -121,6 +123,20 @@ def test_min_amount_of_product():
     db = Database()
     db.get_product_with_min_quantity()
     low_stock_products = db.get_product_with_min_quantity()
-    print("Products", low_stock_products)
+    print("Products are about to run out", low_stock_products)
 
     assert len(low_stock_products) != 0
+    assert low_stock_products[0][0] == 'солодка вода'
+    assert low_stock_products[0][1] == 10
+    assert low_stock_products[1][0] == 'молоко'
+    assert low_stock_products[1][1] == 10
+
+# 12
+@pytest.mark.database
+def test_max_amount_of_product():
+    db = Database()
+    db.get_product_with_max_quantity()
+    plenty_stock_products = db.get_product_with_max_quantity()
+    print("Products are enough", plenty_stock_products)
+
+    assert len(plenty_stock_products) != 0

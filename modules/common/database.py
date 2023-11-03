@@ -60,7 +60,7 @@ class Database():
 # This part is an individual task to practice testing skills for the QA Auto Course
 
     def insert_order(self, order_id, customer_id, product_id, order_date):
-        query = f"INSERT OR REPLACE INTO orders (id, customer_id, product_id, order_date) \
+        query = f"INSERT INTO orders (id, customer_id, product_id, order_date) \
             VALUES ({order_id}, {customer_id}, {product_id}, '{order_date}')"
         self.cursor.execute(query)
         self.connection.commit()
@@ -107,7 +107,7 @@ class Database():
     def get_product_with_max_quantity(self):
         query = "SELECT name, quantity \
                    FROM products \
-                  WHERE quantity = (SELECT MAX(quantity) FROM products"
+                  WHERE quantity = (SELECT MAX(quantity) FROM products)"
         self.cursor.execute(query)
         record = self.cursor.fetchall()
         return record

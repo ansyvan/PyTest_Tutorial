@@ -36,28 +36,39 @@ def test_repo_with_single_char_be_found(github_api):
 
 # This part is an individual task to practice testing skills for the QA Auto Course
 
-#github_api = GitHub(api_token="randomsymbols")
 
 # 6
 @pytest.mark.api
 def test_info_about_user(github_api):
-    headers = {"Authorization": "random symbols"}
+
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": "Bearer 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",     # input token here
+        "X-GitHub-Api-Version": "2022-11-28",}
     r = github_api.get_info_user('ansyvan', headers)
-    #assert r['message'] == 'Requires authentication'
+    assert 'Owns this repository' in r
+    # if you don't have a token use the line below instead of assert 'Owns this repository' in r
+    # assert r['message'] == 'Requires authentication'
     print(r)
 
 # 7
 @pytest.mark.api
 def test_info_about_user_repo(github_api):
-    r = github_api.get_info_user_repository('ansyvan', 'repository', '699413145')
-    assert r['message'] == 'Requires authentication'
-    print(r)
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": "Bearer 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",     # input token here
+        "X-GitHub-Api-Version": "2022-11-28",}
+    r = github_api.get_info_user_repository('ansyvan', 'repository', '699413145', headers)
+    assert any(context['message'] == 'Owns this repository' for context in r.get('contexts', []))
+    # if you don't have a token use the line below instead of assert any(context['message'] == 'Owns this repository' for context in r.get('contexts', []))
+    # assert r['message'] == 'Requires authentication'
 
 # 8
 @pytest.mark.api
 def test_number_of_users_on_page(github_api):
-    r = github_api.list_users()
-    assert len(r) == 30
+    users_per_page = 30
+    r = github_api.list_users(users_per_page)
+    assert len(r) == users_per_page
 
 # 9
 @pytest.mark.api
@@ -86,11 +97,6 @@ def test_emoji_not_exists(github_api):
 # 13
 @pytest.mark.api
 def test_commit(github_api):
-    owner = 'ansyvan'
-    repo = 'pytest_tutorial'
-    commit_sha = '65357753e9b91ce5f243fcc8bb416c6d677ded49'
-    r = github_api.list_branches(owner, repo, commit_sha)
-    #assert r['message'] == '65357753e9b91ce5f243fcc8bb416c6d677ded49'
-    #assert r['message'] == commit_sha
-    #assert '65357753e9b91ce5f243fcc8bb416c6d677ded49' in r
+    r = github_api.list_branches('ansyvan', 'pytest_tutorial')
+
     print(r)

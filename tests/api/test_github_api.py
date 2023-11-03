@@ -43,7 +43,7 @@ def test_info_about_user(github_api):
 
     headers = {
         "Accept": "application/vnd.github+json",
-        "Authorization": "Bearer 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",     # input token here
+        "Authorization": "Bearer randomsymbols",     # input token here
         "X-GitHub-Api-Version": "2022-11-28",}
     r = github_api.get_info_user('ansyvan', headers)
     assert 'Owns this repository' in r
@@ -56,7 +56,7 @@ def test_info_about_user(github_api):
 def test_info_about_user_repo(github_api):
     headers = {
         "Accept": "application/vnd.github+json",
-        "Authorization": "Bearer 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",     # input token here
+        "Authorization": "Bearer randomsymbols",     # input token here
         "X-GitHub-Api-Version": "2022-11-28",}
     r = github_api.get_info_user_repository('ansyvan', 'repository', '699413145', headers)
     assert any(context['message'] == 'Owns this repository' for context in r.get('contexts', []))

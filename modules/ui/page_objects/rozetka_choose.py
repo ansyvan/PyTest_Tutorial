@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 
 
 class RozetkaChoose(BasePage):
-    URL = 'https://rozetka.com.ua/ua/apple/c4627486/#search_text=apple'
+    URL = 'https://rozetka.com.ua/ua/'
 
     def __init__(self) -> None:
         super().__init__()
@@ -14,11 +14,11 @@ class RozetkaChoose(BasePage):
 
     def choose_product(self):
 
-        product_elem = self.driver.find_element(By.CSS_SELECTOR, "body > app-root > div > div > rz-super-portal > div > main > section > div:nth-child(3) > rz-dynamic-widgets > rz-widget-list:nth-child(2) > section > ul > li:nth-child(1) > rz-list-tile > div > a.tile-cats__heading.tile-cats__heading_type_center.ng-star-inserted")
+        product_elem = self.driver.find_element(By.XPATH, "/html/body/app-root/div/div/rz-main-page/div/aside/rz-main-page-sidebar/div[1]/rz-sidebar-fat-menu/div/ul/li[2]/a")
 
         product_elem.click()
 
-        product_elem = self.driver.find_element(By.CSS_SELECTOR, "css=.catalog-grid__cell:nth-child(1) .goods-tile__title")
+        product_elem = self.driver.find_element(By.XPATH, "/html/body/app-root/div/div/rz-main-page/div/main/rz-main-page-content/rz-goods-sections/section[2]/rz-goods-section/ul/li[1]/rz-app-tile/div/div/a[2]")
 
         product_elem.click()
 

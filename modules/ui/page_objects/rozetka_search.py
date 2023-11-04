@@ -1,3 +1,5 @@
+# This part is an individual task to practice testing skills for the QA Auto Course
+
 from modules.ui.page_objects.base_page import BasePage
 from selenium.webdriver.common.by import By
 
@@ -18,3 +20,7 @@ class RozetkaSearch(BasePage):
         search_elem.send_keys(search_keywords)
 
         search_elem.submit()
+
+    def check_title(self, expected_title):
+        return self.driver.title == expected_title
+    

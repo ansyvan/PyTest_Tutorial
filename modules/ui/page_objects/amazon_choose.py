@@ -15,6 +15,9 @@ class AmazonChooseProduct(BasePage):
 
     def go_to(self):
         self.driver.get(AmazonChooseProduct.URL)
+        # Sometimes the other design of the Home page opens.
+        # It have no burger menu with categories, so the test fails
+        # I think the Reload method should be added to prevent the failure
 
     def shop_by_category(self, category, subcategory):
 
@@ -45,9 +48,12 @@ class AmazonChooseProduct(BasePage):
         product_elem.click()
 
     def add_to_cart(self):
+        # this step can fail if the location is set as Ukraine. 
+        # "Add to card" button may be inactive for some regions.
+        # While performing this test it worked fine, but in case of failure, keep this in mind
 
-        product_elem = self.driver.find_element(By.ID, "add-to-cart-button")
-        product_elem.click()
+        buy_btn_elem = self.driver.find_element(By.ID, "add-to-cart-button")
+        buy_btn_elem.click()
     
     def check_title(self, expected_title):
         return self.driver.title == expected_title

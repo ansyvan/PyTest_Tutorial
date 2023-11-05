@@ -32,8 +32,6 @@ def test_repo_with_single_char_be_found(github_api):
     assert r['total_count'] != 0
 
 
-
-
 # This part is an individual task to practice testing skills for the QA Auto Course
 
 
@@ -60,7 +58,8 @@ def test_info_about_user_repo(github_api):
         "X-GitHub-Api-Version": "2022-11-28",}
     r = github_api.get_info_user_repository('ansyvan', 'repository', '699413145', headers)
     assert any(context['message'] == 'Owns this repository' for context in r.get('contexts', []))
-    # if you don't have a token use the line below instead of assert any(context['message'] == 'Owns this repository' for context in r.get('contexts', []))
+    # if you don't have a token use the line below instead of 
+    # assert any(context['message'] == 'Owns this repository' for context in r.get('contexts', []))
     # assert r['message'] == 'Requires authentication'
 
 # 8

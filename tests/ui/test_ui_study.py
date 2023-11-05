@@ -34,7 +34,7 @@ def test_choose_product():
 
     amazon_choose.add_to_cart()
 
-    # чомусь на цьому етапі тест валиться
+    # test fails on this stage
     #assert amazon_choose.check_title("Amazon.com. Spend less. Smile more")
 
     amazon_choose.close()

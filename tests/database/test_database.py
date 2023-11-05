@@ -73,7 +73,7 @@ def test_detailed_orders():
 
 # This part is an individual task to practice testing skills for the QA Auto Course
 
-# 8
+# 8 Check inserting unexpected datatype
 @pytest.mark.database
 def test_incorrect_datatype_insert():
     db = Database()
@@ -106,7 +106,7 @@ def test_existing_id_insert():
     # Check quantity of orders equal to 1
     assert len(orders) == 1
 
-# 10
+# 10 Check if Error message appears if Null id inderted
 @pytest.mark.database
 def test_null_id_insert():
     db = Database()
@@ -117,7 +117,7 @@ def test_null_id_insert():
     # Check quantity of products remains 4
     assert len(products) == 4
 
-# 11
+# 11 Select all products with minimum amount
 @pytest.mark.database
 def test_min_amount_of_product():
     db = Database()
@@ -131,7 +131,7 @@ def test_min_amount_of_product():
     assert low_stock_products[1][0] == 'молоко'
     assert low_stock_products[1][1] == 10
 
-# 12
+# 12 Select all products with maximum amount
 @pytest.mark.database
 def test_max_amount_of_product():
     db = Database()

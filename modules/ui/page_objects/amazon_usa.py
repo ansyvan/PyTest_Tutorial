@@ -1,4 +1,8 @@
-    # def change_location(self, zipcode):
+# In progress...
+# Test on changing location on USA. Fails on "Continue" button in the very end
+    
+
+# def change_location(self, zipcode):
 
     #     wait = WebDriverWait(self.driver, 10)
 

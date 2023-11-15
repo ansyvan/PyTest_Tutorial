@@ -1,257 +1,273 @@
 # PyTest-Tutorial
 
-<h1>Проєктне завдання 1</h1>
+This tutorial was conducted during the QA Automation Course. It consists of the mandatory part and the individual tasks which I developed by myself to practice testing skills on API, Database and UI testing. That part of code is highlighted by comments.
 
-Створити структуру папок і файлів фреймворка.
+Mandatory Part:
 
-1. В склонованому з GiHub репозиторії (це той репозиторій, який ви клонували, виконуючи блок лекцій по GIT) створити наступну ієрархію файлі і папок, що ми будемо вважати початково стуктурою фреймворка:
+<h2>Project Task 1</h2>
 
-Структура папок від кореневої директорії проєкта:
+Create the folder and file structure for the framework.
 
-/config
-/modules
-/modules/common
-/modules/ui
-/modules/ui/page_objects
-/modules/api
-/modules/api/clients
-/tests
-/tests/ui
-/tests/api
+In the cloned GitHub repository (the one you cloned during the GIT lecture block), create the following hierarchy of files and folders, which we will consider as the initial structure of the framework:
 
-Структура файлів від кореневої директорії проєкта:
+Folder structure from the root directory of the project:
 
-/config/config.py
-modules/common/__init__.py
-/modules/ui/page_objects/__init__.py
-/modules/api/clients/__init__.py
-/tests/ui/test_ui.py
-/tests/api/test_api.py
+<br/>/config
+<br/>/modules
+<br/>/modules/common
+<br/>/modules/ui
+<br/>/modules/ui/page_objects
+<br/>/modules/api
+<br/>/modules/api/clients
+<br/>/tests
+<br/>/tests/ui
+<br/>/tests/api
 
-2. Всі створені, змінені та видалені файли додати до коміта і відправити на сервер GitHub за допомогою команди git push
+File structure from the root directory of the project:
 
-<h1>Проєктне завдання 2</h1>
-
-Розробити тести за допомогою модуля pytest, використовуючи фікстури і мітки
-
-В склонованому з GiHub репозиторії (це той репозиторій, який ви клонували, виконуючи блок лекцій по GIT), використовуючи результати попереднього модуля, розробити тести за допомогою модуля pytest, які відповідають наступним вимогам:
-
-1. Мітки check та change зареєстровані в файлі pytest.ini
-2. В файлі conftest.py описати клас User:
-  - За допомогою конструктора задати поля name та second_name зі значеннями за замовчування None
-  - Клас має метод об’єкта “створити” (create). Метод задає полям name та second_name значення вашого імені та прізвища
-  - Клас має метод об’єкта “видалити” (remove). Метод задає полям name та second_name значення пустого рядка
-  - В файлі conftest.py описати фікстуру user. Ця фікстура:
-3. Створює об’єкт класа User
-  - Викликає метод об’єкту create
-  - Повертає об’єкт після виклику методу об’єкту create в тести
-  - Після виконання тесту викликає метод об’єкту remove
-4. В файлі /tests/api/test_fixtures.py створити тест test_change_name:
-  - Тест має мітку check
-  - Використовує фікстуру user
-  - Перевіряє, що поле name об’єкту user відповідає очікуваному
-5. В файлі /tests/api/test_fixtures.py створити тест test_change_second_name:
-  - Тест має мітку check
-  - Використовує фікстуру user
-  - Перевіряє, що поле second_name об’єкту user відповідає очікуваному
-6. В файлі /tests/api/test_api.py створити тест test_remove_name:
-  - Тест має мітку change
-  - Використовує фікстуру user
-  - Першим кроком тест змінює поле name об’єкта user на пустий рядок
-  - Другим кромом тест перевіряє, що зміни відбулися і вони правильні
-7. В файлі /tests/api/test_api.py створити тест test_name:
-  - Тест має мітку check
-  - Використовує фікстуру user
-  - Перевіряє, що поле name об’єкту user відповідає очікуваному
-8. В файлі /tests/api/test_api.py створити тест test_second_name:
-  - Тест має мітку check
-  - Використовує фікстуру user
-  - Перевіряє, що поле second_name об’єкту user відповідає очікуваному
-
-Всі створені, змінені та видалені файли додати до коміта і відправити на сервер GitHub за допомогою команди git push
+<br/>/config/config.py
+<br/>/modules/common/__init__.py
+<br/>/modules/ui/page_objects/__init__.py
+<br/>/modules/api/clients/__init__.py
+<br/>/tests/ui/test_ui.py
+<br/>/tests/api/test_api.py
 
 
-<h1>Проєктне завдання 3</h1>
+<h2>Project Task 2</h2>
 
-Розробити тести для тестування HTTP протоколу за допомогою модулів pytest та requests, використовуючи фікстури і мітки
+To develop tests using the pytest module, fixtures, and markers, follow these requirements:
 
-В склонованому з GitHub репозиторії (це той репозиторій, який ви клонували, виконуючи блок лекцій по GIT), використовуючи результати попереднього модуля, розробити тести за допомогою модулів pytest та requests, які відповідають наступним вимогам:
+1. Markers `*check*` and `*change*` are registered in the `*pytest.ini*` file.
 
-1. Мітка http зареєстрована в файлі pytest.ini
+2. In the conftest.py file, describe the User class:
+  - Use the constructor to set the name and second_name fields with default values as None.
+  - The class has a "create" method. This method sets the name and second_name fields with your name and surname.
+  - The class has a "remove" method. This method sets the name and second_name fields to an empty string.
 
-2. В файлі /tests/test_http.py створити тест test_first_request:
-  - Тест має мітку http
-  - Першим кроком тест відправляє HTTP запит з методом GET на адресу https://api.github.com/zen і зберігає відповідь сервера у змінну
-  - Другим кроком тест, за допомогою f-рядків виводить на екран атрибут text відповіді від сервера
+3. In the conftest.py file, describe the 'user' fixture. This fixture:
+  - Creates an object of the User class.
+  - Calls the "create" method of the object.
+  - Returns the object after calling the "create" method to the tests.
+  - After the test execution, calls the "remove" method of the object.
 
-3. В файлі /tests/test_http.py створити тест test_second_request:
-  - Тест має мітку http
-  - Першим кроком тест відправляє HTTP запит з методом GET на адресу https://api.github.com/users/defunkt і зберігає відповідь сервера у змінну
-  - Тест перевіряє, що атрибут name тіла відповіді від сервера відповідає значенню ‘Chris Wanstrath’
-  - Тест перевіряє, що статус код відповіді від сервера відповідає числу 200
-  - Тест перевіряє, що заголовок Server відповіді від сервера відповідає значенню ‘GitHub.com’
-4. В файлі /tests/test_http.py створити тест test_status_code_request:
-  - Тест має мітку http
-  - Першим кроком тест відправляє HTTP запит з методом GET на адресу https://api.github.com/users/sergii_butenko і зберігає відповідь сервера у змінну
-  - Тест перевіряє, що статус код відповіді від сервера відповідає числу 404
+4. In the /tests/api/test_fixtures.py file, create the test 'test_change_name':
+  - The test has a 'check' marker.
+  - The test has a 'check' marker.
+  - It checks that the 'name' field of the 'user' object matches the expected value.
 
-Всі створені, змінені та видалені файли додати до коміта і відправити на сервер GitHub за допомогою команди git push
+5. In the /tests/api/test_fixtures.py file, create the test 'test_change_second_name':
+  - The test has a 'check' marker.
+  - It uses the 'user' fixture.
+  - It checks that the 'second_name' field of the 'user' object matches the expected value.
 
+6. In the /tests/api/test_api.py file, create the test 'test_remove_name':
+  - The test has a 'change' marker.
+  - It uses the 'user' fixture.
+  - As the first step, the test changes the 'name' field of the 'user' object to an empty string.
+  - As the second step, the test checks that the changes occurred and are correct.
 
-<h1>Проєктне завдання 4</h1>
+7. In the /tests/api/test_api.py file, create the test 'test_name':
+  - The test has a 'check' marker.
+  - It uses the 'user' fixture.
+  - It checks that the 'name' field of the 'user' object matches the expected value.
 
-Розробити тести для тестування API Github, створивши для цього написаний вами API клієнт, використовуючи при цьому API документацію GitHub https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28, та модулі pytest і requests
-
-Обовязкова частина:
-
-В склонованому репозитрії, використовуючи результати попереднього модуля, розробити тести, використовуючи модуль pytest та requests, які відповідають наступним вимогам:
-
-1. Мітка api зареєстрована в pytest.ini файлі.
-2. В файлі /modules/api/clients/github.py створити клас GitHub.
-  - В описі методу є обов’язковий параметр username
-  - В тілі методу формується адреса, на яку потрібно відправити HTTP запит. Логіка формування адреси - поєднати два рядки:
-    1. https://api.github.com/users/
-    2. Значення параметра username
-    3. В тілі методу відправляється HTTP запит з методом GET на URL адресу з попереднього кроку
-    4. Метод повертає тіло відповіді від сервера у форматі json
-  - В описі методу є обов’язковий параметр name
-  - В тілі методу відправляється HTTP запит з методом GET на URL адресу "https://api.github.com/search/repositories" з параметром рядка запиту q значення якого дорівнює значенню параметра методу name
-  - Метод повертає тіло відповіді від сервера у форматі json
-    1. Клас має метод об’єкту get_user:
-    2. Клас має метод об’єкту search_repo:
-3. В файлі conftest.py описати фікстуру github_api Ця фікстура:
-    1. Створює об’єкт класа GitHub
-    2. Повертає створений об’єкт в тести
-4. В файлі /tests/api/test_github_api.py створити тест test_user_exists:
-  - Тест має мітку api
-  - Використовує фікстуру github_api
-  - В тілі тесту використати метод get_user фікстури github_api
-  - Використати ім’я користувача для пошуку defunkt
-  - Перевірити, що тіло відповіді від сервера має атрибут login, значення якого має дорівнювати  defunkt
-5. В файлі /tests/api/test_github_api.py створити тест test_user_not_exists:
-  - Тест має мітку api
-  - Використовує фікстуру github_api
-  - В тілі тесту використати метод get_user фікстури github_api
-  - Використати ім’я користувача для пошуку butenkosergii
-  - Перевірити, що тіло відповіді від сервера має атрибут message значення якого має дорівнювати  Not Found
-6. В файлі /tests/api/test_github_api.py створити тест test_repo_can_be_found:
-  - Тест має мітку api
-  - Використовує фікстуру github_api
-  - В тілі тесту використати метод search_repo фікстури github_api
-  - Використати ім’я репозиторія для пошуку become-qa-auto
-  - Перевірити, що тіло відповіді від сервера має атрибут total_count, значення якого має дорівнювати очікуваному на момент створення тесту значенню, наприклад 25.
-7. В файлі /tests/api/test_github_api.py створити тест test_repo_cannot_be_found:
-  - Тест має мітку api
-  - Використовує фікстуру github_api
-  - В тілі тесту використати метод search_repo фікстури github_api
-  - Використати ім’я репозиторія для пошуку sergiibutenko_repo_non_exist або будь-яке інше ім’я, що не існує на момент створення тесту
-  - Перевірити, що тіло відповіді від сервера має атрибут total_count, значення якого має дорівнювати 0.
-8. В файлі /tests/api/test_github_api.py створити тест test_repo_with_single_char_be_found:
-  - Тест має мітку api
-  - Використовує фікстуру github_api
-  - В тілі тесту використати метод search_repo фікстури github_api
-  - Використати ім’я репозиторія для пошуку s або будь-яке інше ім’я, що складається з одного символу
-  - Перевірити, що тіло відповіді від сервера має атрибут total_count, значення якого має не дорівнювати 0.
-
-Всі створені, змінені та видалені файли додати до коміта і відправити на сервер GitHub за допомогою команди git push.
+8. In the /tests/api/test_api.py file, create the test 'test_second_name':
+  - The test has a 'check' marker.
+  - It uses the 'user' fixture.
+  - It checks that the 'second_name' field of the 'user' object matches the expected value.
 
 
+<h2>Project Task 3</h2>
 
-<h1>Проєктне завдання 5</h1>
+Develop tests for testing the HTTP protocol using the pytest and requests modules, using fixtures and labels.
 
-В склонованому репозиторії, використовуючи результати попереднього модуля, розробити тести, використовуючи модуль pytest та sqlite3, які відповідають наступним вимогам:
+In the cloned GitHub repository develop tests using the pytest and requests modules that meet the following requirements:
 
-1. Мітка database зареєстрована в pytest.ini файлі.
-2. В файлі /modules/common/database.py створити клас Database.
-  - Клас має конструктор, в якому ініціалізовані два атрибути об’єкта:
-    1. self.connection - об’єкт, який реалізує з'єднання з базою даних (див. Лекцію 18.4)
-    2. self.cursor - курсор об’єкта self.connection (див. Лекцію 18.4)
-  - Клас має метод об’єкта test_connection:
-    1. Метод виконує SQL запит SELECT sqlite_version();
-    2. Результатом виконання методу є виведена в термінал версія бази даних.
-  - Клас має метод об’єкта get_all_users:
-    1. Метод має повернути із таблиці customers значення полів name, address, city для всіх користувачів
-  - Клас має метод об’єкта get_user_address_by_name:
-    1. Метод має обов’язковий параметр name
-    2. Метод має повернути із таблиці customers значення полів address, city, postalCode, country для користувача з іменем name
-  - Клас має метод об’єкта update_product_qnt_by_id:
-    1. Метод має обов’язкові параметри product_id, qnt
-    2. Метод має змінити кількість товару за вказаним в парметрі product_id унікальним значенням в таблиці products на значення вказаного в параметрі qnt
-  - Клас має метод об’єкта select_product_qnt_by_id:
-    1. Метод має обов’язковий параметр product_id
-    2. Метод має повернути кількість товару за вказаним в парметрі product_id унікальним значенням із таблиці products
-  - Клас має метод об’єкта insert_product:
-    1. Метод має обов’язкові параметри product_id, name, description, qnt
-    2. Метод має вставити, або замінити дані в таблиці products для колонок id, name, description, quantity. Дані взяти з параметрів product_id, name, description, qnt
-  - Клас має метод об’єкта delete_product_by_id:
-    1. Метод має обов’язковий параметр product_id
-    2. Метод має видалити товар за вказаним в парметрі product_id унікальним значенням із таблиці products
-  - Клас має метод об’єкта get_detailed_orders:
-    1. Використовуючи команду JOIN та таблиці orders, customers, products, повернути із таблиці orders наступну інформацію у відповідному порядку: унікальний номер замовлення, ім’я покупця, ім’я замовленого продукту, опис замовленого продукту, дату замовлення
-3. В файлі /tests/database/test_database.py створити тест test_database_connection:
-  - Тест має мітку database
-  - В тілі тесту створити екземпляр класу Database
-  - В тілі тесту виконати метод об’єкта test_connection
-4. В файлі /tests/database/test_database.py створити тест test_check_all_users:
-  - Тест має мітку database
-  - В тілі тесту створити екземпляр класу Database
-  - В тілі тесту виконати метод об’єкта get_all_users
-  - Вивести в термінал результат виконання методу об’єкта get_all_users
-5. В файлі /tests/database/test_database.py створити тест test_check_user_sergii:
-  - Тест має мітку database
-  - В тілі тесту створити екземпляр класу Database
-  - В тілі тесту виконати метод об’єкта get_user_address_by_name зі значенням параметру name = Sergii
-  - Перевірити, що дані, які повернув метод get_user_address_by_name  відповідають наступним даним:
+1. The 'http' marker is registered in the pytest.ini file
+
+2. In the file /tests/test_http.py, create the test_first_request:
+  - The test has the 'http' marker
+  - As the first step, the test sends an HTTP GET request to the address https://api.github.com/zen and stores the server's response in a variable.
+  - As the second step, the test prints the text attribute of the server's response to the screen using f-strings.
+
+3. In the file /tests/test_http.py, create the test test_second_request:
+  - The test has the http marker
+  - As the first step, the test sends an HTTP GET request to the address https://api.github.com/users/defunkt and stores the server's response in a variable
+  - The test checks that the name attribute of the response body from the server corresponds to the value 'Chris Wanstrath'
+  - The test checks that the status code of the response from the server corresponds to the number 200
+  - The test checks that the Server header of the response from the server corresponds to the value 'GitHub.com'
+
+4. In the file /tests/test_http.py, create a test named test_status_code_request:
+  - The test should have the marker http.
+  - In the first step, the test sends an HTTP GET request to the address https://api.github.com/users/sergii_butenko and stores the server's response in a variable.
+  - The test verifies that the status code of the server's response corresponds to the number 404.
+
+
+<h2>Project Task 4</h2>
+
+Develop tests for testing the Github API by creating your own API client, using the GitHub API documentation https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28, and the pytest and requests modules.
+
+In the cloned repository, develop tests using the pytest and requests modules that meet the following requirements:
+
+1. The 'api' marker is registered in the pytest.ini file.
+
+2. In the file /modules/api/clients/github.py, create a class GitHub.
+  - The method description includes a mandatory parameter username.
+  - In the body of the method, the URL to which the HTTP request should be sent is formed. The logic of forming the URL is to concatenate two strings:
+      - https://api.github.com/users/
+      - The value of the username parameter
+      - In the body of the method, an HTTP request with the GET method is sent to the URL from the previous step.
+      - The method returns the body of the response from the server in json format.
+  - The method description includes a mandatory parameter name.
+  - In the body of the method, an HTTP request with the GET method is sent to the URL "https://api.github.com/search/repositories" with the query string parameter q, the value of which is equal to the value of the name parameter of the method.
+  - The method returns the body of the response from the server in json format.
+    1. The class has an object method 'get_user':
+    2. The class has an object method 'search_repo':
+    
+3. In the conftest.py file, describe the github_api fixture. This fixture:
+  - Creates an object of the GitHub class.
+  - Returns the created object to the tests.
+
+4. In the file /tests/api/test_github_api.py, create the test test_user_exists:
+  - The test has the api marker.
+  - Uses the github_api fixture.
+  - In the body of the test, use the get_user method of the github_api fixture.
+  - Use the username for the search: defunkt.
+  - Verify that the body of the response from the server has an attribute login, the value of which should be equal to defunkt.
+
+5. In the file /tests/api/test_github_api.py, create the test test_user_not_exists:
+  - The test has the api marker.
+  - Uses the github_api fixture.
+  - In the body of the test, use the get_user method of the github_api fixture.
+  - Use the username for the search: butenkosergii.
+  - Verify that the body of the response from the server has an attribute message, and its value should be equal to Not Found.
+
+6. In the file /tests/api/test_github_api.py, create the test test_repo_can_be_found:
+  - The test has the api marker.
+  - Uses the github_api fixture.
+  - In the body of the test, use the search_repo method of the github_api fixture.
+  - Use the repository name for the search: become-qa-auto.
+  - Verify that the body of the response from the server has an attribute total_count, and its value should be equal to the expected value at the time of test creation, for example, 25.
+
+7. In the file /tests/api/test_github_api.py, create the test test_repo_cannot_be_found:
+  - The test has the api marker.
+  - Uses the github_api fixture.
+  - In the body of the test, use the search_repo method of the github_api fixture.
+  - Use a repository name for the search that does not exist at the time of test creation, for example, sergiibutenko_repo_non_exist.
+  - Verify that the body of the response from the server has an attribute total_count, and its value should be 0.
+
+8. In the file /tests/api/test_github_api.py, create the test test_repo_with_single_char_be_found:
+  - The test has the api marker.
+  - Uses the github_api fixture.
+  - In the body of the test, use the search_repo method of the github_api fixture.
+  - Use the repository name for the search: s or any other name consisting of a single character.
+  - Verify that the body of the response from the server has an attribute total_count, and its value should not be 0.
+
+
+<h2>Project Task 5</h2>
+
+In the cloned repository, develop tests using the pytest and sqlite3 modules, meeting the following requirements:
+
+1. The marker "database" is registered in the pytest.ini file.
+
+2. In the file /modules/common/database.py, create the Database class.
+  - The class has a constructor where two object attributes are initialized:
+    1. self.connection - an object that implements a connection to the database
+    2. self.cursor - the cursor of the self.connection object
+  - The class has an object method test_connection:
+    1. The method executes an SQL query SELECT sqlite_version();
+    2. The result of the method is the version of the database printed to the terminal.
+  - The class has an object method get_all_users:
+    1. The method should return the values of the name, address, and city fields for all users from the customers table.
+  - The class has an object method get_user_address_by_name:
+    1. The method has a mandatory parameter name.
+    2. The method should return the values of the address, city, postalCode, and country fields for the user with the specified name from the customers table.
+  - The class has an object method update_product_qnt_by_id:
+    1. The method has mandatory parameters product_id, qnt.
+    2. The method should change the quantity of the product with the specified product_id in the products table to the value specified in the qnt parameter.
+  - The class has an object method select_product_qnt_by_id:
+    1. The method has a mandatory parameter product_id.
+    2. The method should return the quantity of the product with the specified product_id, a unique value from the products table.
+  - The class has an object method insert_product:
+    1. The method has mandatory parameters product_id, name, description, qnt.
+    2. The method should insert or replace data in the products table for the id, name, description, and quantity columns. Data should be taken from the product_id, name, description, and qnt parameters.
+  - The class has an object method delete_product_by_id:
+    1. The method has a mandatory parameter product_id.
+    2. The method should delete the product with the specified product_id, a unique value, from the products table.
+  - The class has an object method get_detailed_orders:
+    1. Using the JOIN command and tables orders, customers, products, return the following information from the orders table in the corresponding order: unique order number, customer name, ordered product name, ordered product description, order date.
+
+3. In the file /tests/database/test_database.py, create the test test_database_connection:
+  - The test has the marker "database."
+  - In the test body, create an instance of the Database class.
+  - In the test body, execute the test_connection object method.
+
+4. In the file /tests/database/test_database.py, create the test test_check_all_users:
+  - The test has the marker "database."
+  - In the test body, create an instance of the Database class.
+  - In the test body, execute the get_all_users object method.
+  - Print the result of executing the get_all_users object method to the terminal.
+
+5. In the file /tests/database/test_database.py, create the test test_check_user_sergii:
+  - The test has the marker "database."
+  - In the test body, create an instance of the Database class.
+  - In the test body, execute the get_user_address_by_name object method with the parameter name = Sergii.
+  - Verify that the data returned by the get_user_address_by_name method corresponds to the following data:
     1. Maydan Nezalezhnosti 1
     2. Kyiv
     3. 3127
     4. Ukraine
-6. В файлі /tests/database/test_database.py створити тест test_product_qnt_update:
-  - Тест має мітку database
-  - В тілі тесту створити екземпляр класу Database
-  - В тілі тесту виконати метод об’єкта update_product_qnt_by_id зі значенням параметрів product_id = 1 та qnt = 25
-  - Перевірити, що після оновлення даних кількість товару з унікальним номером 1 дорівнює 25
-7. В файлі /tests/database/test_database.py створити тест test_product_insert:
-  - Тест має мітку database
-  - В тілі тесту створити екземпляр класу Database
+
+6. In the file /tests/database/test_database.py, create the test test_product_qnt_update:
+  - The test has the marker "database."
+  - In the test body, create an instance of the Database class.
+  - In the test body, execute the update_product_qnt_by_id object method with the parameter values product_id = 1 and qnt = 25.
+  - Verify that after updating the data, the quantity of the product with the unique number 1 is equal to 25.
+
+7. In the file /tests/database/test_database.py, create the test test_product_insert:
+  - The test has the marker "database".
+  - In the test body, create an instance of the Database class.
   - В тілі тесту виконати метод об’єкта insert_product зі значенням параметрів product_id = 4, name = печиво, description = солодке, qnt = 30
-  - Перевірити, що після оновлення даних, кількість товару з унікальним номером 4 дорівнює 30
-8. В файлі /tests/database/test_database.py створити тест test_product_delete:
-  - Тест має мітку database
-  - В тілі тесту створити екземпляр класу Database
-  - В тілі тесту створити тестові дані, створивши продукт в таблиці products зі значеннями параметрів product_id = 99, name = тестові, description = дані, qnt = 999
-  - В тілі тесту видалити дані з таблички products зі значенням параметра product_id = 99
-  - Перевірити, що кількість рядків, що було знайдено дорівнює 0
-9. В файлі /tests/database/test_database.py створити тест test_detailed_orders:
-  - Тест має мітку database
-  - В тілі тесту створити екземпляр класу Database
-  - В тілі тесту вивести в термінал результат виконання методу get_detailed_orders об’єкта класу Database 
-  - Перевірити, що кількість знайдених результатів дорівнює 1
-  - Перевірити, що дані, які повернув метод get_detailed_orders,  відповідають наступним даним:
+  - Verify that after updating the data, the quantity of the product with the unique number 4 is equal to 30.
+
+8. In the file /tests/database/test_database.py, create the test test_product_delete:
+  - The test has the marker "database".
+  - In the test body, create an instance of the Database class.
+  - In the test body, create test data by creating a product in the products table with the parameter values product_id = 99, name = тестові, description = дані, qnt = 999.
+  - In the test body, delete data from the products table with the parameter value product_id = 99.
+  - Verify that the number of rows found is equal to 0.
+
+9. In the file /tests/database/test_database.py, create the test test_detailed_orders:
+  - The test has the marker "database".
+  - In the test body, create an instance of the Database class.
+  - In the test body, print to the terminal the result of executing the get_detailed_orders method of the Database class object. 
+  - Verify that the number of found results is equal to 1.
+  - Verify that the data returned by the get_detailed_orders method corresponds to the following data:
     1. 1
     2. Sergii
     3. солодка вода
     4. з цукром
 
-Всі створені, змінені та видалені файли додати до коміта і відправити на сервер GitHub за допомогою команди git push.
+<h2>Project Task 6</h2>
 
-<h1>Проєктне завдання 6</h1>
+In the cloned repository, develop tests using the pytest and selenium modules that meet the following requirements:
 
-В склонованому репозиторії, використовуючи результати попереднього модуля, розробити тести, використовуючи модулі pytest та selenium, які відповідають наступним вимогам:
+1. The "ui" marker is registered in the pytest.ini file.
 
-1. Мітка ui зареєстрована в pytest.ini файлі.
-2. У каталозі modules/ui/page_object створити файл base_page.py, а в ньому клас BasePage. 
-  - В конструкторі класу ініціалізувати об’єкт для комунікації з вебдрайвером.
-  - Клас має метод об’єкта close, задача якого закрити відкритий браузер.
-3. У каталозі modules/ui/page_object створити файл sign_in_page.py, а в ньому клас SignInPage. 
-  - Клас SignInPage наслідуваний від BasePage класу.
-  - В конструкторі класу викликати конструктор батьківського класу.
-  - В класі реалізований метод об’єкту, який приймає параметри username і password. Задача методу ввести в поле email ім’я користувача, в поле password пароль і натиснути кнопку sign in.
-  - В класі реалізований метод об’єкту, який перевіряє, чи відповідає заголовок сторінки очікуваному.
-4. У каталогу tests/ui створити файл test_ui_page_object.py. А в ньому створити тест, який:
-  - Має мітку ui.
-  - Виконує такі кроки:
-    1. Відкриває сторінку Sign In.
-    2. Вводить некоректні дані в поля імені та пароля.
-    3. Перевіряє, що заголовок сторінки відповідає очікуваному.
-    4. Закриває браузер.
+2. the modules/ui/page_object directory, create a file named base_page.py, and in it, define a class named BasePage. 
+  - In the class constructor, initialize an object for communication with the web driver.
+  - The class should have a close method whose task is to close the open browser.
+
+3. In the modules/ui/page_object directory, create a file named sign_in_page.py, and in it, define a class named SignInPage. 
+  - The SignInPage class should inherit from the BasePage class.
+  - In the class constructor, call the constructor of the parent class.
+  - Implement a method of the object that takes username and password as parameters. The task of the method is to enter the username into the email field, the password into the password field, and click the sign-in button.
+  - Implement a method of the object that checks whether the page title matches the expected title.
+
+4. In the tests/ui directory, create a file named test_ui_page_object.py. In this file, create a test that:
+  - Has the "ui" marker.
+  - Performs the following steps:
+    1. Opens the Sign In page.
+    2. Enters incorrect data into the username and password fields.
+    3. Checks whether the page title matches the expected title.
+    4. Closes the browser.

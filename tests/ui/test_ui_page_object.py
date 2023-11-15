@@ -4,17 +4,13 @@ import pytest
 
 @pytest.mark.ui
 def test_check_incorrect_username_page_object():
-    # створення обʼєкту сторінки
-    sign_in_page = SignInPage()
+    
+    sign_in_page = SignInPage() # create page object
+    sign_in_page.go_to()    # open page https://github.com/login
 
-    # відкриваємо сторінку https://github.com/login
-    sign_in_page.go_to()
+    sign_in_page.try_login("page_object@gmail.com", "wrong password")  # try to login GitHub
 
-    # виконуємо спробу увійти в систему GitHub
-    sign_in_page.try_login("page_object@gmail.com", "wrong password")
-
-    # перевіряємо, що назва сторінки така, яку ми очікуємо
+    # check if the page name is the one we expect
     assert sign_in_page.check_title("Sign in to GitHub · GitHub")
 
-    # закриваємо браузер
-    sign_in_page.close()
+    sign_in_page.close()    # close browser

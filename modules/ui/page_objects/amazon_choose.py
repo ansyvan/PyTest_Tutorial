@@ -1,4 +1,4 @@
-# This part is an individual task to practice testing skills for the QA Auto Course
+# This part is an individual task to practice testing skills after the QA Automation Course
 
 from modules.ui.page_objects.base_page import BasePage
 from selenium.webdriver.common.by import By
@@ -51,6 +51,7 @@ class AmazonChooseProduct(BasePage):
         # this step can fail if the location is set as Ukraine. 
         # "Add to card" button may be inactive for some regions.
         # While performing this test it worked fine, but in case of failure, keep this in mind
+        # create if-else !!!
 
         buy_btn_elem = self.driver.find_element(By.ID, "add-to-cart-button")
         buy_btn_elem.click()

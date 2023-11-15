@@ -4,7 +4,9 @@ import requests
 class GitHub:
 
     def get_user(self, username):
-        r = requests.get(f"https://api.github.com/users/{username}")
+        r = requests.get(
+            f"https://api.github.com/users/{username}"
+            )
         body = r.json()
 
         return body
@@ -19,9 +21,7 @@ class GitHub:
         return body
     
 
-
 # This part is an individual task to practice testing skills for the QA Auto Course
-
     
     def get_info_user(self, username, headers):
         r = requests.get(
@@ -45,9 +45,10 @@ class GitHub:
     
 
     def list_users(self, users_per_page=30):
-        r = requests.get(f"https://api.github.com/users",
-        params={"per_page": users_per_page}
-        )
+        r = requests.get(
+            f"https://api.github.com/users",
+            params={"per_page": users_per_page}
+            )
         body = r.json()
 
         return body
@@ -56,7 +57,7 @@ class GitHub:
     def list_emojis(self):
         r = requests.get(
             "https://api.github.com/emojis"
-        )
+            )
         body = r.json()
 
         return body
@@ -65,7 +66,7 @@ class GitHub:
     def list_branches(self, owner, repo):
         r = requests.get(
             f"https://api.github.com/repos/{owner}/{repo}"
-        )
+            )
         body = r.json()
 
         return body

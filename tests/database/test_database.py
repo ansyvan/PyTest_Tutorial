@@ -2,78 +2,44 @@ import pytest
 import sqlite3
 from modules.common.database import Database
 
-# 1
+# This part is an individual task to practice testing skills after the QA Automation Course
+
+# Check if Error message appears if Null id inderted
 @pytest.mark.database
-def test_database_connection():
+def test_null_id_insert():
     db = Database()
-    db.test_connection()
 
-# 2
+    with pytest.raises(sqlite3.OperationalError):
+        db.insert_product(None, 'any product', 'any description', 200)
+    products = db.get_all_products()
+    # Check quantity of products remains 4
+    assert len(products) == 4
+
+# Select all products with minimum amount
 @pytest.mark.database
-def test_check_all_users():
+def test_min_amount_of_product():
     db = Database()
-    users = db.get_all_users()
+    db.get_product_with_min_quantity()
+    low_stock_products = db.get_product_with_min_quantity()
+    print("Products are about to run out", low_stock_products)
 
-    print(users)
+    assert len(low_stock_products) != 0
+    assert low_stock_products[0][0] == 'солодка вода'
+    assert low_stock_products[0][1] == 10
+    assert low_stock_products[1][0] == 'молоко'
+    assert low_stock_products[1][1] == 10
 
-# 3
+# Select all products with maximum amount
 @pytest.mark.database
-def test_check_user_sergii():
+def test_max_amount_of_product():
     db = Database()
-    user = db.get_user_address_by_name('Sergii')
+    db.get_product_with_max_quantity()
+    plenty_stock_products = db.get_product_with_max_quantity()
+    print("Products are enough", plenty_stock_products)
 
-    assert user[0][0] == 'Maydan Nezalezhnosti 1'
-    assert user[0][1] == 'Kyiv'
-    assert user[0][2] == '3127'
-    assert user[0][3] == 'Ukraine'
+    assert len(plenty_stock_products) != 0
 
-# 4
-@pytest.mark.database
-def test_product_qnt_update():
-    db = Database()
-    db.update_product_qnt_by_id(1, 25)
-    water_qnt = db.select_product_qnt_by_id(1)
-
-    assert water_qnt[0][0] == 25
-
-# 5
-@pytest.mark.database
-def test_product_insert():
-    db = Database()
-    db.insert_product(4, 'печиво', 'солодке', 30)
-    water_qnt = db.select_product_qnt_by_id(4)
-
-    assert water_qnt[0][0] == 30
-
-# 6
-@pytest.mark.database
-def test_product_delete():
-    db = Database()
-    db.insert_product(99, 'тестові', 'дані', 999)
-    db.delete_product_by_id(99)
-    qnt = db.select_product_qnt_by_id(99)
-
-    assert len(qnt) == 0
-
-# 7
-@pytest.mark.database
-def test_detailed_orders():
-    db = Database()
-    orders = db.get_detailed_orders()
-    print("Замовлення", orders)
-    # Check quantity of orders equal to 1
-    assert len(orders) == 1
-
-    #Check structure of data
-    assert orders[0][0] == 1
-    assert orders[0][1] == 'Sergii'
-    assert orders[0][2] == 'солодка вода'
-    assert orders[0][3] == 'з цукром'
-
-
-# This part is an individual task to practice testing skills for the QA Auto Course
-
-# 8 Check inserting unexpected datatype
+# Check inserting unexpected datatype
 @pytest.mark.database
 def test_incorrect_datatype_insert():
     db = Database()
@@ -92,7 +58,7 @@ def test_incorrect_datatype_insert():
     # Check number of new products equal to 0
     assert len(qnt) == 0
 
-# 9 Check if Error message appears if not unique id inserted
+# Check if Error message appears if not unique id inserted
 @pytest.mark.database
 def test_existing_id_insert():
     db = Database()
@@ -106,37 +72,72 @@ def test_existing_id_insert():
     # Check quantity of orders equal to 1
     assert len(orders) == 1
 
-# 10 Check if Error message appears if Null id inderted
+
+# This part is from QA Automation Course
+
 @pytest.mark.database
-def test_null_id_insert():
+def test_database_connection():
     db = Database()
+    db.test_connection()
 
-    with pytest.raises(sqlite3.OperationalError):
-        db.insert_product(None, 'any product', 'any description', 200)
-    products = db.get_all_products()
-    # Check quantity of products remains 4
-    assert len(products) == 4
 
-# 11 Select all products with minimum amount
 @pytest.mark.database
-def test_min_amount_of_product():
+def test_check_all_users():
     db = Database()
-    db.get_product_with_min_quantity()
-    low_stock_products = db.get_product_with_min_quantity()
-    print("Products are about to run out", low_stock_products)
+    users = db.get_all_users()
 
-    assert len(low_stock_products) != 0
-    assert low_stock_products[0][0] == 'солодка вода'
-    assert low_stock_products[0][1] == 10
-    assert low_stock_products[1][0] == 'молоко'
-    assert low_stock_products[1][1] == 10
+    print(users)
 
-# 12 Select all products with maximum amount
+
 @pytest.mark.database
-def test_max_amount_of_product():
+def test_check_user_sergii():
     db = Database()
-    db.get_product_with_max_quantity()
-    plenty_stock_products = db.get_product_with_max_quantity()
-    print("Products are enough", plenty_stock_products)
+    user = db.get_user_address_by_name('Sergii')
 
-    assert len(plenty_stock_products) != 0
+    assert user[0][0] == 'Maydan Nezalezhnosti 1'
+    assert user[0][1] == 'Kyiv'
+    assert user[0][2] == '3127'
+    assert user[0][3] == 'Ukraine'
+
+
+@pytest.mark.database
+def test_product_qnt_update():
+    db = Database()
+    db.update_product_qnt_by_id(1, 25)
+    water_qnt = db.select_product_qnt_by_id(1)
+
+    assert water_qnt[0][0] == 25
+
+
+@pytest.mark.database
+def test_product_insert():
+    db = Database()
+    db.insert_product(4, 'печиво', 'солодке', 30)
+    water_qnt = db.select_product_qnt_by_id(4)
+
+    assert water_qnt[0][0] == 30
+
+
+@pytest.mark.database
+def test_product_delete():
+    db = Database()
+    db.insert_product(99, 'тестові', 'дані', 999)
+    db.delete_product_by_id(99)
+    qnt = db.select_product_qnt_by_id(99)
+
+    assert len(qnt) == 0
+
+
+@pytest.mark.database
+def test_detailed_orders():
+    db = Database()
+    orders = db.get_detailed_orders()
+    print("Замовлення", orders)
+    # Check quantity of orders equal to 1
+    assert len(orders) == 1
+
+    #Check structure of data
+    assert orders[0][0] == 1
+    assert orders[0][1] == 'Sergii'
+    assert orders[0][2] == 'солодка вода'
+    assert orders[0][3] == 'з цукром'

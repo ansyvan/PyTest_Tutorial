@@ -1,4 +1,4 @@
-# This part is an individual task to practice testing skills for the QA Auto Course
+# This part is an individual task to practice testing skills after the QA Automation Course
 
 from modules.ui.page_objects.base_page import BasePage
 from selenium.webdriver.common.by import By

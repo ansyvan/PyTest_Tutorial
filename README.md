@@ -213,10 +213,12 @@ In the cloned repository, develop tests using the `pytest` and `sqlite3` modules
   - In the test body, create an instance of the `Database` class.
   - In the test body, execute the `get_user_address_by_name` object method with the parameter `name = Sergii`.
   - Verify that the data returned by the `get_user_address_by_name` method corresponds to the following data:
-    ```1. Maydan Nezalezhnosti 1
+    ```
+    1. Maydan Nezalezhnosti 1
     2. Kyiv
     3. 3127
-    4. Ukraine```
+    4. Ukraine
+    ```
 
 6. In the file `/tests/database/test_database.py`, create the test `test_product_qnt_update`:
   - The test has the `database` marker.
@@ -243,10 +245,12 @@ In the cloned repository, develop tests using the `pytest` and `sqlite3` modules
   - In the test body, print to the terminal the result of executing the `get_detailed_orders` method of the `Database` class object. 
   - Verify that the number of found results is equal to `1`.
   - Verify that the data returned by the `get_detailed_orders` method corresponds to the following data:
-    ```1. 1
+    ```
+    1. 1
     2. Sergii
     3. солодка вода
-    4. з цукром```
+    4. з цукром
+    ```
 
 <h2>Project Task 6</h2>
 

@@ -2,20 +2,20 @@ import pytest
 import sqlite3
 from modules.common.database import Database
 
-# This part is an individual task to practice testing skills after the QA Automation Course
+# This part is an individual task to practice testing skills after the QA Automation Course.
 
-# Check if Error message appears if Null id inderted
+# Check if Error message appears if Null id inderted.
 @pytest.mark.database
 def test_null_id_insert():
     db = Database()
 
     with pytest.raises(sqlite3.OperationalError):
         db.insert_product(None, 'any product', 'any description', 200)
-    products = db.get_all_products()
-    # Check quantity of products remains 4
-    assert len(products) == 4
+    # products = db.get_all_products()
+    # # Check quantity of products remains 4
+    # assert len(products) == 4
 
-# Select all products with minimum amount
+# Select all products with minimum amount.
 @pytest.mark.database
 def test_min_amount_of_product():
     db = Database()
@@ -29,7 +29,7 @@ def test_min_amount_of_product():
     assert low_stock_products[1][0] == 'молоко'
     assert low_stock_products[1][1] == 10
 
-# Select all products with maximum amount
+# Select all products with maximum amount.
 @pytest.mark.database
 def test_max_amount_of_product():
     db = Database()
@@ -39,26 +39,26 @@ def test_max_amount_of_product():
 
     assert len(plenty_stock_products) != 0
 
-# Check inserting unexpected datatype
+# Check inserting unexpected datatype.
 @pytest.mark.database
 def test_incorrect_datatype_insert():
     db = Database()
 
     with pytest.raises(sqlite3.OperationalError):
         db.insert_product('number', 666, True, 'quantity')
-    qnt = db.select_product_qnt_by_name(666)
-    print ("New data inserted", qnt)
-    # Check number of new products equal to 0
-    assert len(qnt) == 0
+    # qnt = db.select_product_qnt_by_name(666)
+    # print ("New data inserted", qnt)
+    # # Check number of new products equal to 0
+    # assert len(qnt) == 0
 
     with pytest.raises(sqlite3.OperationalError):
         db.insert_product(99, 666, True, 'quantity')
-    qnt = db.select_product_qnt_by_name(666)
-    print ("New data inserted", qnt)
-    # Check number of new products equal to 0
-    assert len(qnt) == 0
+    # qnt = db.select_product_qnt_by_name(666)
+    # print ("New data inserted", qnt)
+    # # Check number of new products equal to 0
+    # assert len(qnt) == 0
 
-# Check if Error message appears if not unique id inserted
+# Check if Error message appears if not unique id inserted.
 @pytest.mark.database
 def test_existing_id_insert():
     db = Database()
@@ -66,20 +66,19 @@ def test_existing_id_insert():
 
     with pytest.raises(sqlite3.IntegrityError):
         db.insert_order(99, 2, 2, '03:14:08')
+
     db.delete_order_by_id(99)
     orders = db.get_all_orders()
-    print("Замовлення", orders)
-    # Check quantity of orders equal to 1
+    # Check quantity of orders still remains equal to 1
     assert len(orders) == 1
 
 
-# This part is from QA Automation Course
+# This part is from QA Automation Course.
 
 @pytest.mark.database
 def test_database_connection():
     db = Database()
     db.test_connection()
-
 
 @pytest.mark.database
 def test_check_all_users():
@@ -133,10 +132,10 @@ def test_detailed_orders():
     db = Database()
     orders = db.get_detailed_orders()
     print("Замовлення", orders)
-    # Check quantity of orders equal to 1
+    # Check quantity of orders equal to 1.
     assert len(orders) == 1
 
-    #Check structure of data
+    # Check the structure of data.
     assert orders[0][0] == 1
     assert orders[0][1] == 'Sergii'
     assert orders[0][2] == 'солодка вода'

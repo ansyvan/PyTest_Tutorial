@@ -10,7 +10,6 @@ class Database():
         self.cursor.execute(query)
         record = self.cursor.fetchall()
         return record
-    
 
     def get_product_with_min_quantity(self):
         query = "SELECT name, quantity \
@@ -19,7 +18,6 @@ class Database():
         self.cursor.execute(query)
         record = self.cursor.fetchall()
         return record
-    
 
     def get_product_with_max_quantity(self):
         query = "SELECT name, quantity \
@@ -29,7 +27,6 @@ class Database():
         record = self.cursor.fetchall()
         return record
 
-
     def insert_order(self, order_id, customer_id, product_id, order_date):
         query = f"INSERT INTO orders (id, customer_id, product_id, order_date) \
             VALUES ({order_id}, {customer_id}, {product_id}, '{order_date}')"
@@ -38,20 +35,17 @@ class Database():
         record = self.cursor.fetchall()
         return record
     
-    
     def get_all_orders(self):
         query = "SELECT id, customer_id, product_id, order_date FROM orders"
         self.cursor.execute(query)
         record = self.cursor.fetchall()
         return record
     
-    
     def get_all_products(self):
         query = "SELECT id, name, description, quantity FROM products"
         self.cursor.execute(query)
         record = self.cursor.fetchall()
         return record
-    
     
     def delete_order_by_id(self, order_id):
         query = f"DELETE FROM orders WHERE id = {order_id}"

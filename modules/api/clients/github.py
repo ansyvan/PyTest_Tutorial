@@ -23,21 +23,27 @@ class GitHub:
 
 # This part is an individual task to practice testing skills for the QA Auto Course
     
-    def get_info_user(self, username, headers):
+    github_headers = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": "Bearer randomsymbols",     # input a valid token here
+        "X-GitHub-Api-Version": "2022-11-28",
+        }
+    
+    def get_info_user(self, username, github_headers):
         r = requests.get(
             f"https://api.github.com/users/{username}/hovercard",
-            headers=headers
+            headers=github_headers
             )
         body = r.json()
 
         return body
     
     
-    def get_info_user_repository(self, username, repository, repo_id, headers):
+    def get_info_user_repository(self, username, repository, repo_id, github_headers):
         r = requests.get(
             f"https://api.github.com/users/{username}/hovercard",
             params={"subject_type": repository, "subject_id": repo_id},
-            headers=headers
+            headers=github_headers
             )
         body = r.json()
 
@@ -65,7 +71,7 @@ class GitHub:
 
     def list_branches(self, owner, repo):
         r = requests.get(
-            f"https://api.github.com/repos/{owner}/{repo}"
+            f"https://api.github.com/repos/{owner}/{repo}/branches"
             )
         body = r.json()
 

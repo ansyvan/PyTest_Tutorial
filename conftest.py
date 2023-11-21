@@ -31,3 +31,13 @@ def user():
 def github_api():
     api = GitHub()
     yield api
+
+# This part is an individual task to practice testing skills after the QA Automation Course.
+
+@pytest.fixture
+def github_headers():
+    return {
+        "Accept": "application/vnd.github+json",
+        "Authorization": "Bearer randomsymbols",  # input a valid token here
+        "X-GitHub-Api-Version": "2022-11-28",
+    }

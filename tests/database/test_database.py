@@ -4,16 +4,13 @@ from modules.common.database import Database
 
 # This part is an individual task to practice testing skills after the QA Automation Course.
 
-# Check if Error message appears if Null id inderted.
+# Check if Error message appears if Null id inserted.
 @pytest.mark.database
 def test_null_id_insert():
     db = Database()
 
     with pytest.raises(sqlite3.OperationalError):
         db.insert_product(None, 'any product', 'any description', 200)
-    # products = db.get_all_products()
-    # # Check quantity of products remains 4
-    # assert len(products) == 4
 
 # Select all products with minimum amount.
 @pytest.mark.database
@@ -46,17 +43,9 @@ def test_incorrect_datatype_insert():
 
     with pytest.raises(sqlite3.OperationalError):
         db.insert_product('number', 666, True, 'quantity')
-    # qnt = db.select_product_qnt_by_name(666)
-    # print ("New data inserted", qnt)
-    # # Check number of new products equal to 0
-    # assert len(qnt) == 0
 
     with pytest.raises(sqlite3.OperationalError):
         db.insert_product(99, 666, True, 'quantity')
-    # qnt = db.select_product_qnt_by_name(666)
-    # print ("New data inserted", qnt)
-    # # Check number of new products equal to 0
-    # assert len(qnt) == 0
 
 # Check if Error message appears if not unique id inserted.
 @pytest.mark.database

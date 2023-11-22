@@ -46,7 +46,7 @@ def test_emoji_not_exists(github_api):
 
 # Testing the list of branches in the repository.
 @pytest.mark.api
-def test_commit(github_api):
+def test_branches(github_api):
     r = github_api.list_branches('ansyvan', 'pytest_tutorial')
     assert len(r) >= 2      # The number of branches is 2 or more in case more branches will be added.
     assert 'main' in r

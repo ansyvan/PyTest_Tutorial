@@ -17,9 +17,8 @@ class AmazonChooseProduct(BasePage):
     def go_to(self):
         self.driver.get(AmazonChooseProduct.URL)
 
-    # Sometimes the other design of the Home page opens.
-    # It have no burger menu with categories, so the test fails.
-    # Reload method is to prevent the failure.    
+    # Reload method is to prevent the failure when the alternative design of the Home page opens.
+    # It has no burger menu with categories, so the test could fail.
     def reload_page(self):
         self.driver.refresh()
 
@@ -27,8 +26,6 @@ class AmazonChooseProduct(BasePage):
 
         # Create a WebDriverWait instance
         wait = WebDriverWait(self.driver, 20)
-
-        # self.reload_page()
 
         # Locate the "Shop by Category" element
         category_elem = wait.until(EC.element_to_be_clickable((By.ID, "nav-hamburger-menu")))
@@ -74,7 +71,7 @@ class AmazonChooseProduct(BasePage):
             else:
                 pass
         except TimeoutException:
-            print("Neither button is present.")
+            print("Neither button is present.") # In case the product in out of stock
 
     # Check if the element with ID "productTitle" is present on the page and has non-empty text.
     def check_text_on_page(self):

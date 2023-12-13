@@ -38,6 +38,6 @@ def github_api():
 def github_headers():
     return {
         "Accept": "application/vnd.github+json",
-        "Authorization": "Bearer randomsymbols",  # input a valid token here
+        "Authorization": "Bearer myValidToken",  # input a valid token here
         "X-GitHub-Api-Version": "2022-11-28",
     }

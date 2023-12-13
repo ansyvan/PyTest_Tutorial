@@ -5,16 +5,18 @@ import pytest
 # Tests that require a user authentication token.
 # To pass this test input a valid token in the conftest.py file.
 @pytest.mark.api
+@pytest.mark.token
+@pytest.mark.skip   # marker used to skip this test
 def test_info_about_user_with_valid_token(github_api, github_headers):
     r = github_api.get_info_user('ansyvan', github_headers)
-    assert 'Owns this repository' in r
-    print(r)
+    assert 'contexts' in r
 
 @pytest.mark.api
+@pytest.mark.token
 def test_info_about_user_with_invalid_token(github_api, github_headers):
     r = github_api.get_info_user('ansyvan', github_headers)
-    assert r['message'] == 'Bad credentials'
-    print(r)
+    assert 'message' in r and 'Bad credentials' in r['message']
+
 
 # Testing list of users.
 @pytest.mark.api
@@ -27,6 +29,7 @@ def test_number_of_users_on_page(github_api):
 def test_user_is_first_in_list(github_api):
     r = github_api.list_users()
     assert 'mojombo' in r[0]['login']
+
 
 # Emoji tests.
 @pytest.mark.api
@@ -44,13 +47,14 @@ def test_emoji_not_exists(github_api):
     emoji = github_api.list_emojis()
     assert 'not_emoji' not in emoji
 
+
 # Testing the list of branches in the repository.
 @pytest.mark.api
 def test_branches(github_api):
     r = github_api.list_branches('ansyvan', 'pytest_tutorial')
     assert len(r) >= 2      # The number of branches is 2 or more in case more branches will be added.
-    assert 'main' in r
-    assert 'one_more_branch' in r
+    assert 'main' in r[0]['name']
+    assert 'one_more_branch' in r[1]['name']
 
 
 # This part is from QA Automation Course.

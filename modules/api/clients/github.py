@@ -23,11 +23,6 @@ class GitHub:
 
 # This part is an individual task to practice testing skills for the QA Auto Course
     
-    github_headers = {
-        "Accept": "application/vnd.github+json",
-        "Authorization": "Bearer randomsymbols",     # input a valid token here
-        "X-GitHub-Api-Version": "2022-11-28",
-        }
     
     def get_info_user(self, username, github_headers):
         r = requests.get(

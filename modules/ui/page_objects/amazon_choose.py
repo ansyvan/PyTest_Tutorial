@@ -59,7 +59,7 @@ class AmazonChooseProduct(BasePage):
             buy_btn_elem = wait.until(EC.presence_of_all_elements_located((By.ID, "add-to-cart-button")))
             if buy_btn_elem.is_displayed() and buy_btn_elem.is_enabled():
                 buy_btn_elem.click()
-                return  # Successfully clicked, no need to check the alternative button
+                print("Add to cart button clicked")  # Successfully clicked, no need to check the alternative button
         except TimeoutException:
             pass
 

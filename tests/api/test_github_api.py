@@ -2,11 +2,9 @@ import pytest
 
 # This part is an individual task to practice testing skills for the QA Auto Course.
 
-# Tests that require a user authentication token.
-# To pass this test input a valid token in the conftest.py file.
 @pytest.mark.api
-@pytest.mark.token
-@pytest.mark.skip   # marker used to skip this test
+@pytest.mark.token  # Tests that require a valid user authentication token in the conftest.py file.
+@pytest.mark.xfail(reason="We don't have a valid token")
 def test_info_about_user_with_valid_token(github_api, github_headers):
     r = github_api.get_info_user('ansyvan', github_headers)
     assert 'contexts' in r
@@ -17,6 +15,32 @@ def test_info_about_user_with_invalid_token(github_api, github_headers):
     r = github_api.get_info_user('ansyvan', github_headers)
     assert 'message' in r and 'Bad credentials' in r['message']
 
+# Group of emoji tests.
+@pytest.mark.api
+@pytest.mark.emoji
+def test_emoji_amount(github_api):
+    r = github_api.list_emojis()
+    assert len(r) == 1877
+
+# Check several emojis using 'parametrize' marker.
+@pytest.mark.api
+@pytest.mark.emoji
+@pytest.mark.parametrize("emoji_name", [('zombie_man'), ('sunrise_over_mountains'), ('red_square'), ('bookmark')])
+def test_list_of_emojis_exists(github_api, emoji_name):
+    emoji = github_api.list_emojis()
+    assert emoji_name in emoji
+
+@pytest.mark.api
+@pytest.mark.emoji
+def test_emoji_exists(github_api):
+    emoji = github_api.list_emojis()
+    assert 'alarm_clock' in emoji
+
+@pytest.mark.api
+@pytest.mark.emoji
+def test_emoji_not_exists(github_api):
+    emoji = github_api.list_emojis()
+    assert 'not_emoji' not in emoji
 
 # Testing list of users.
 @pytest.mark.api
@@ -29,24 +53,6 @@ def test_number_of_users_on_page(github_api):
 def test_user_is_first_in_list(github_api):
     r = github_api.list_users()
     assert 'mojombo' in r[0]['login']
-
-
-# Emoji tests.
-@pytest.mark.api
-def test_emoji_amount(github_api):
-    r = github_api.list_emojis()
-    assert len(r) == 1877
-
-@pytest.mark.api
-def test_emoji_exists(github_api):
-    emoji = github_api.list_emojis()
-    assert 'alarm_clock' in emoji
-
-@pytest.mark.api
-def test_emoji_not_exists(github_api):
-    emoji = github_api.list_emojis()
-    assert 'not_emoji' not in emoji
-
 
 # Testing the list of branches in the repository.
 @pytest.mark.api

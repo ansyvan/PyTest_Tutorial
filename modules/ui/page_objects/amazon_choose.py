@@ -47,7 +47,7 @@ class AmazonChooseProduct(BasePage):
 
     def select_product(self):
 
-        product_elem = self.driver.find_element(By.CSS_SELECTOR, "#search > div.s-desktop-width-max.s-desktop-content.s-wide-grid-style-t1.s-opposite-dir.s-wide-grid-style.sg-row > div.sg-col-20-of-24.s-matching-dir.sg-col-16-of-20.sg-col.sg-col-8-of-12.sg-col-12-of-16 > div > span.rush-component.s-latency-cf-section > div.s-main-slot.s-result-list.s-search-results.sg-row > div:nth-child(6)")
+        product_elem = self.driver.find_element(By.XPATH, "//img[contains(@class,'s-image') and @data-image-index='1']")
         product_elem.click()
 
     def add_to_cart(self):
